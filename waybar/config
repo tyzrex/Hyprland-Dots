@@ -1,0 +1,175 @@
+{
+    "height": 22, 
+    "layer": "top",
+    "modules-left": ["custom/launcher", "wlr/workspaces","custom/right-arrw" ,"custom/app-title-icon", "hyprland/window"],
+    "modules-center":["custom/spotify"],
+    "modules-right": ["custom/lock", "cpu", "memory","tray", "network","pulseaudio#microphone","pulseaudio",  "backlight", "battery", "clock", "custom/power-menu"],
+    "wlr/workspaces": {
+        "all-outputs": false,
+        "active-only": "false",
+        "on-click": "activate",
+        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format-icons": {
+          "1": "󪤍",
+          "2": "󪤕",
+          "3": "󪥌",
+          "4": "󪥅",
+          "5": "󪤄",
+          "6": "󪤋",
+          "7": "󪤝",
+          "8": "󪤏",
+          "urgent": "󪤳",
+          "default": "󪤾"
+        }
+      },
+    "hyprland/window": {
+        "format": "<b>{}</b>",
+        "max-length" :10
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%b %d %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+      "interval": 10,
+      "format": " {}%",
+      "max-length": 10,
+      "on-click": ""
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {}%",
+        "format-alt":" {used:0.1f}GB",
+        "max-length": 10
+    },
+    "backlight": {
+        "device": "eDP-1",
+        "format": "{icon}",
+        "tooltip-format": "{percent}",
+        "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "]
+
+    },
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": " ",
+        "format-disconnected": "睊",
+        "tooltip-format": "{essid}",
+        "on-click": "~/.local/bin/rofi-wifi-menu.sh",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "婢",
+        "format-icons": {
+            "default": ["", "", "墳"]
+        },
+        "on-click": "pavucontrol &"
+    },
+
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "max-length": 20,
+      "format": "{icon} ",
+      "format-warning": "{icon}",
+      "format-critical": "{icon}",
+      "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
+      "format-plugged": "ﮣ", 
+
+      "format-alt": "{icon} {time}",
+      "format-full": "ﮣ", 
+      "format-icons": ["󱊡", "󱊢", "󱊣"]
+    },
+    "custom/weather": {
+      "exec": "python3 ~/.config/waybar/scripts/weather.py",
+      "restart-interval": 300,
+      "return-type": "json"
+    },   
+   "custom/lock": {
+       "tooltip" : false,
+       "on-click": "swaylock",
+       "format" : ""
+    },
+   "custom/spotify": {
+        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+        "format": " {}",
+        "return-type": "json",
+        "on-click": "playerctl play-pause",
+        "on-double-click-right": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "max-length" :30
+    },
+    "custom/power-menu": {
+        "format": " ⏻ ",
+        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &"
+    }, 
+    "custom/launcher": {
+        "format": "",
+        "on-click": "rofi -show drun &"
+    },
+    "custom/dot": {
+        "format": "  ",
+        "tooltip": false
+      },
+      "custom/dot-alt": {
+        "format": "  ",
+        "tooltip": false
+      },
+      "custom/left-arrw": {
+        "format": "󪤗",
+        "tooltip": false
+      },
+      "custom/right-arrw": {
+        "format": "󪤖 ",
+        "tooltip": false
+      },
+      "custom/arrow-dec": {
+        "format": " 󪥜 ",
+        "tooltip": false
+      },
+      "custom/app-title-icon": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "~/.config/waybar/scripts/iconcheck.sh",
+        "tooltip": false
+      },
+      "custom/app-name": {
+        "format": "<b>{}</b>",
+        "interval": 1,
+        "exec": "~/.config/waybar/scripts/win_class_way.sh",
+        "tooltip": false
+      },
+      "custom/pacman-update": {
+        "format": "󪥔",
+        "tooltip": false
+      },
+      "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    
+    "temperature": {
+        "thermal-zone": 1,
+        "format": "{temperatureF}°F ",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C "
+    }
+}
